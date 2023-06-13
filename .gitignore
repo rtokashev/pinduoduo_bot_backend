@@ -1,5 +1,5 @@
 venv
-**/__pycachec/
+**/__pycache/
 .venv
 .mypy_cache/
 .idea
