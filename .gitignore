@@ -1,0 +1,10 @@
+venv
+**/__pycachec/
+.venv
+.mypy_cache/
+.idea
+.pytest_cache/
+.coverage
+.coverage.*
+.cache
+# Добавлять ли alembic.ini?
