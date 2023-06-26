@@ -2,11 +2,12 @@
 name = "tg_bot"
 version = "0.1.0"
 description = ""
-authors = ["rtokashev <azerot12123@gmail.com>"]
+authors = ["rtokashev <azerot12123@gmail.com>", "bonrg.2.08 <bonrg.2.08@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 aiogram = "^2.25.1"
+pydantic = "^1.10.9"
 
 [tool.poetry.dev-dependencies]
 
