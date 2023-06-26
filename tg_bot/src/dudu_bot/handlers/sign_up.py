@@ -12,27 +12,13 @@ from dudu_bot.keyboards import (
     main_rkm,
     reg_rkm
 )
-from dudu_bot.settings import settings
 from aiogram.utils.exceptions import MessageToDeleteNotFound
-
-
-async def is_member_channels(message: types.Message):
-    check = list()
-    user_chat_id = message.chat.id
-    for channel_chat_id in settings.channel_chat_ids:
-        sub = await BOT.get_chat_member(chat_id=channel_chat_id, user_id=user_chat_id)
-        if sub.status != types.ChatMemberStatus.LEFT:
-            check.append(True)
-        else:
-            check.append(False)
-    if all(check):
-        return True
-    else:
-        return False
+from dudu_bot.utils import is_member_channels
 
 
 @DP.message_handler(regexp=fr'{main_texts.reg_btn}', state=None)
 async def sign_up(message: types.Message):
+    # check if user registered TODO
     await message.answer(
         text=main_texts.share_phone_txt,
         reply=False,

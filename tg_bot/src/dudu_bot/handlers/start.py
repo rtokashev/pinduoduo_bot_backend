@@ -1,23 +1,21 @@
 from aiogram import types
-from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.builtin import CommandStart
-from aiogram.types import CallbackQuery, ReplyKeyboardRemove
 from dudu_bot.texts import main_texts
 from dudu_bot.keyboards import (
     reg_rkm,
     main_rkm,
     about_bot_ikm,
 )
-from dudu_bot.settings import settings, DP, BOT
+from dudu_bot.settings import DP, BOT, settings
 
 
 @DP.message_handler(CommandStart())
 async def start(message: types.Message):
-    chat_id = message.from_user.id
+    chat_id = message.chat.id
     is_user = False #TODO
     await BOT.send_sticker(
         chat_id=chat_id,
-        sticker='CAACAgIAAxkBAAEJZ0xkkIY8Corsu4W_mu9jXAjHaBFM_wACAhYAAg0naUpXB81IWRo4wy8E'
+        sticker=settings.welcome_sticker
     )
     if is_user:
         await message.reply(
