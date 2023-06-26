@@ -1,5 +1,5 @@
 venv
-**/__pycache/
+**/__pycache__/
 .venv
 .mypy_cache/
 .idea
@@ -7,4 +7,5 @@ venv
 .coverage
 .coverage.*
 .cache
+secret
 # Добавлять ли alembic.ini?
