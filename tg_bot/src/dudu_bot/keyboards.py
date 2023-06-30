@@ -12,8 +12,8 @@ main_rkm = ReplyKeyboardMarkup(
     [
         [KeyboardButton(main_texts.purchase_reg_btn)],
         [KeyboardButton(main_texts.referral_btn)],
-        [KeyboardButton(main_texts.subscribe_btn)],
-        [KeyboardButton(main_texts.ask_btn)],
+        # [KeyboardButton(main_texts.subscribe_btn)],
+        # [KeyboardButton(main_texts.ask_btn)],
     ],
     resize_keyboard=True,
     one_time_keyboard=True
@@ -45,6 +45,12 @@ channel_link_ikm = InlineKeyboardMarkup(
         [shopping_channel_ikb, news_channel_ikb],
         [i_member_ikb],
         [reg_cancel_ikb]
+    ]
+)
+
+filter_channel_link_ikm = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [shopping_channel_ikb, news_channel_ikb],
     ]
 )
 

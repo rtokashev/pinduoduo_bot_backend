@@ -1,4 +1,6 @@
 import re
+import httpx
+import aiohttp
 
 from urllib.parse import urlparse, parse_qs
 from dudu_bot.settings import settings, BOT
@@ -34,3 +36,16 @@ async def is_member_channels(message: types.Message):
         return True
     else:
         return False
+
+
+class APIClient:
+    transport: httpx.AsyncHTTPTransport = httpx.AsyncHTTPTransport(retries=3)
+    headers: dict = {'accept': 'application/json', 'Content-Type': 'application/json'}
+    session: httpx.AsyncClient = httpx.AsyncClient(
+        transport=transport,
+        timeout=3,
+        headers=headers
+    )
+
+    def __call__(self) -> httpx.AsyncClient:
+        return self.session

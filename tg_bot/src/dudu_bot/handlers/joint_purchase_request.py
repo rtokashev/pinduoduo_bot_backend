@@ -1,3 +1,5 @@
+import httpx
+
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
@@ -11,13 +13,18 @@ from dudu_bot.keyboards import (
 from dudu_bot.settings import settings
 from dudu_bot.utils import (
     check_goods_url,
-    get_goods_id_goods_image
+    get_goods_id_goods_image,
+    APIClient
 )
+from dudu_bot.filters import IsNotBanned, IsChannelsSubscriber
 
 
-@DP.message_handler(regexp=fr'{main_texts.purchase_reg_btn}', state=None)
+@DP.message_handler(
+    IsNotBanned(),
+    IsChannelsSubscriber(),
+    regexp=fr'{main_texts.purchase_reg_btn}',
+    state=None)
 async def purchase(message: types.Message):
-    # check if user registered TODO
     await message.answer(
         text=main_texts.goods_url_txt,
         reply=False,
@@ -28,7 +35,7 @@ async def purchase(message: types.Message):
 
 
 @DP.message_handler(state=JointPurchaseRequest.Request, content_types=types.ContentType.ANY)
-async def request(message: types.Message, state: FSMContext):
+async def request_purchase(message: types.Message, state: FSMContext):
     if message.content_type == types.message.ContentType.TEXT and await check_goods_url(message.text):
         goods_id, goods_image = await get_goods_id_goods_image(url=message.text)
         await state.update_data(goods_id=goods_id)
@@ -48,6 +55,7 @@ async def request(message: types.Message, state: FSMContext):
 @DP.callback_query_handler(text_contains="post_confirm", state=JointPurchaseRequest.Post)
 async def post(call: CallbackQuery, state: FSMContext):
     await call.message.edit_reply_markup()
+    request = APIClient()
     data = await state.get_data()
     goods_id = data.get('goods_id')
     goods_image = data.get('goods_image')
@@ -61,7 +69,28 @@ async def post(call: CallbackQuery, state: FSMContext):
     post_id = post_data.message_id
     chat_id = call.message.chat.id
     post_url = settings.post_url.format(post_id)
-    await call.message.answer(text=main_texts.pub_post_txt.format(post_url))
+    body = {
+        'chat_id': chat_id,
+        "link": goods_url,
+        "goods_id": goods_id,
+        "photo": goods_image,
+        "post_id": post_id,
+        "post_url": post_url
+    }
+    try:
+        response = await request.session.post(
+            url=f'{settings.api_url}purchases',
+            json=body
+        )
+    except httpx.ConnectError:
+        response = None
+    if response:
+        await call.message.answer(text=main_texts.pub_post_txt.format(post_url))
+    else:
+        await call.message.reply(
+            text=main_texts.error_txt,
+            reply=False
+        )
     await state.finish()
 
 
@@ -74,7 +103,7 @@ async def post_cancel(call: CallbackQuery, state: FSMContext):
 
 
 @DP.callback_query_handler(text="req_cancel", state=JointPurchaseRequest)
-async def post_cancel(call: CallbackQuery, state: FSMContext):
+async def req_cancel(call: CallbackQuery, state: FSMContext):
     await call.message.edit_reply_markup()
     await call.message.delete()
     await state.reset_state()
