@@ -18,7 +18,9 @@ class BaseController(Generic[ModelType]):
         return await self.repository.get_all(skip, limit, join)
 
     async def create(self, data: dict[str, Any]) -> Union[ModelType, None]:
-        return await self.repository.create(data)
+        item = await self.repository.create(data)
+        await self.repository.apply_changes()
+        return item
 
     async def search(self, attributes: dict, limit: int) -> Union[List[ModelType], None]:
         return await self.repository.search(attributes, limit)

@@ -4,9 +4,11 @@ from fastapi import APIRouter, Depends, Path, Query, Response, status
 from fastapi.exceptions import HTTPException
 
 from app.controllers import factory as controllers_factory
+from app.controllers.limits import UserLimitsController
 from app.controllers.user import UserController
 from app.schemas.requests.user import NewUserRequestSchema
 from app.schemas.responses.user import UserBannedResponse, UserResponseSchema
+from app.schemas.responses.limits import UserLimitsResponseSchema
 
 users_router = APIRouter()
 
@@ -66,3 +68,16 @@ async def set_user_banned(
         telegram_id=telegram_id,
         is_banned=is_banned,
     )
+
+
+@users_router.get(
+    path='/{telegram_id}/limits',
+    status_code=status.HTTP_200_OK,
+    description='Получение лимитов запросов пользователя',
+)
+async def get_user_limits(
+    user_limits_controller: UserLimitsController = Depends(controllers_factory.get_user_limits_controller),
+    telegram_id: int = Path(),
+) -> UserLimitsResponseSchema:
+    user_limits = await user_limits_controller.get_user_limits(telegram_id)
+    return UserLimitsResponseSchema.from_orm(user_limits)

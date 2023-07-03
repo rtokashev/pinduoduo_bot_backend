@@ -17,17 +17,14 @@ class BaseRepository(Generic[ModelType]):  # noqa: WPS214
         self.model = get_args(self.__class__.__orig_bases__[0])[0]
         self.db_session = db_session
 
+    async def apply_changes(self):
+        await self._common_commit()
+
     async def create(self, data: dict[str, Any] = None) -> Union[ModelType, None]:
         if data is None:
             data = {}
         model = self.model(**data)
         self.db_session.add(model)
-        try:
-            await self.db_session.commit()
-        except Exception as err:
-            await self.db_session.rollback()
-            logging.error(str(err))
-            raise err
         return model
 
     async def search(self, attributes: dict, limit: int) -> Union[List[ModelType], None]:
@@ -77,3 +74,11 @@ class BaseRepository(Generic[ModelType]):  # noqa: WPS214
     async def _one(self, query: Select) -> Union[ModelType, None]:
         result_set = await self.db_session.scalars(query)
         return result_set.one()
+
+    async def _common_commit(self):
+        try:
+            await self.db_session.commit()
+        except Exception as err:
+            await self.db_session.rollback()
+            logging.error(str(err))
+            raise err
