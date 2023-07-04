@@ -20,9 +20,8 @@ class IsChannelsSubscriber(BoundFilter):
         if all(check):
             return True
         else:
-            await BOT.send_message(
-                chat_id=message.chat.id,
-                text=main_texts.channel_sub_txt,
+            await message.answer(
+                text=f'{main_texts.channel_sub_txt}',
                 reply_markup=filter_channel_link_ikm
             )
             return False
@@ -47,13 +46,17 @@ class IsNotBanned(BoundFilter):
         except httpx.ConnectError:
             response = None
         if response:
-            is_banned = response.json()[0].get('is_banned', False)
-            if is_banned:
-                await message.answer(
-                    text=main_texts.is_banned_txt,
-                    reply_markup=types.ReplyKeyboardRemove()
-                )
-                return False
+            user = response.json()
+            if user:
+                is_banned = user[0].get('is_banned')
+                if is_banned:
+                    await message.answer(
+                        text=main_texts.is_banned_txt,
+                        reply_markup=types.ReplyKeyboardRemove()
+                    )
+                    return False
+                else:
+                    return True
             else:
                 return True
         else:

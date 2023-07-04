@@ -5,7 +5,7 @@ from dudu_bot.filters import setup_filters
 
 
 async def on_shutdown(dp):
-    await BOT.close()
+    await BOT.log_out()
     await STORAGE.close()
 
 
