@@ -1,4 +1,5 @@
 import json
+import httpx
 
 from aiogram import types
 from aiogram.dispatcher import FSMContext
@@ -13,12 +14,12 @@ from dudu_bot.keyboards import (
     reg_rkm
 )
 from aiogram.utils.exceptions import MessageToDeleteNotFound
-from dudu_bot.utils import is_member_channels
+from dudu_bot.utils import is_member_channels, APIClient
+from dudu_bot.settings import settings
 
 
 @DP.message_handler(regexp=fr'{main_texts.reg_btn}', state=None)
 async def sign_up(message: types.Message):
-    # check if user registered TODO
     await message.answer(
         text=main_texts.share_phone_txt,
         reply=False,
@@ -31,7 +32,7 @@ async def sign_up(message: types.Message):
 async def telephone(message: types.Message, state: FSMContext):
     if message.content_type == types.message.ContentType.CONTACT:
         contact = json.loads(message.contact.as_json())
-        chat_id = message.from_user.id
+        chat_id = message.chat.id
         phone = contact.get('phone_number')
         username = message.from_user.username
         await state.update_data(chat_id=chat_id)
@@ -60,6 +61,7 @@ async def telephone(message: types.Message, state: FSMContext):
 
 @DP.callback_query_handler(text_contains="member", state=UserRegister.Channel)
 async def subscribe(call: CallbackQuery, state: FSMContext):
+    request = APIClient()
     data = await state.get_data()
     try:
         message_id = data.get('message_id')
@@ -71,15 +73,33 @@ async def subscribe(call: CallbackQuery, state: FSMContext):
     await call.message.delete()
     is_member = await is_member_channels(message=call.message)
     if is_member:
-        await call.message.reply(
-            text=main_texts.reg_success_txt,
-            reply=False,
-            reply_markup=main_rkm
-        )
+
         chat_id = data.get('chat_id')
-        phone = data.get('phone')
+        phone = data.get('phone').replace('+', '')
         username = data.get('username')
-        # request to rest api TODO
+        body = {
+            "telegram_id": chat_id,
+            "phone": phone,
+            "username": username
+        }
+        try:
+            response = await request.session.post(
+                url=f'{settings.api_url}users',
+                json=body
+            )
+        except httpx.ConnectError:
+            response = None
+        if response:
+            await call.message.reply(
+                text=main_texts.reg_success_txt,
+                reply=False,
+                reply_markup=main_rkm
+            )
+        else:
+            await call.message.reply(
+                text=main_texts.error_txt,
+                reply=False
+            )
         await state.finish()
     else:
         await call.message.reply(
