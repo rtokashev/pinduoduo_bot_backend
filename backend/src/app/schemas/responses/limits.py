@@ -10,13 +10,13 @@ class UserLimitsResponseSchema(BaseModel):
     # )
     free_requests_count: int = Field(..., description='Кол-во доступных бесплатных запросов')
     total_requests_count: Union[int, None] = Field(
-        ..., description='Общее кол-во доступных запросов(при активной подписке)'
+        ..., description='Общее кол-во доступных запросов(при активной подписке)',
     )
     daily_requests_count: Union[int, None] = Field(
-        ..., description='Кол-во доступных запросов в день(при активной подписке)'
+        ..., description='Кол-во доступных запросов в день(при активной подписке)',
     )
     available_requests_count: Union[int, None] = Field(
-        ..., description='Общее кол-во использованных запросов(при активной подписке)'
+        ..., description='Общее кол-во использованных запросов(при активной подписке)',
     )
 
     class Config:

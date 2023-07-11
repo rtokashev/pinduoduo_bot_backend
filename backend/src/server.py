@@ -1,6 +1,7 @@
 from fastapi import APIRouter, FastAPI
 
 from api.purchase import purchases_router
+from api.review import reviews_router
 from api.search import search_router
 from api.user import users_router
 
@@ -10,6 +11,7 @@ def init_routes(app_: FastAPI):
     api_router.include_router(users_router, prefix='/users')
     api_router.include_router(search_router, prefix='/search')
     api_router.include_router(purchases_router, prefix='/purchases')
+    api_router.include_router(reviews_router, prefix='/reviews')
     app_.include_router(api_router)
 
 

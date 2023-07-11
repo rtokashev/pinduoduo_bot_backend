@@ -7,8 +7,8 @@ from app.controllers import factory as controllers_factory
 from app.controllers.limits import UserLimitsController
 from app.controllers.user import UserController
 from app.schemas.requests.user import NewUserRequestSchema
-from app.schemas.responses.user import UserBannedResponse, UserResponseSchema
 from app.schemas.responses.limits import UserLimitsResponseSchema
+from app.schemas.responses.user import UserBannedResponse, UserResponseSchema
 
 users_router = APIRouter()
 

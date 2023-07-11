@@ -45,7 +45,7 @@ async def create_purchase(
     if not user_has_available_limits:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail='User has reached limits of requests(daily or free)'
+            detail='User has reached limits of requests(daily or free)',
         )
     try:
         new_purchase = await purchase_controller.create(new_purchase.dict())

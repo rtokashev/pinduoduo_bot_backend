@@ -14,7 +14,7 @@ class UserRepository(BaseRepository[User]):
             values(
                 is_subscriber=False,
                 subscription_end_date=None,
-                is_banned=is_banned
+                is_banned=is_banned,
             )
         )
         cursor = await self.db_session.execute(update_query)
