@@ -24,16 +24,20 @@ class UserSearchSchema(ConfiguredBaseModel):
     is_banned: Union[bool, None]
 
 
-
 class PurchaseSearchSchema(ConfiguredBaseModel):
     kind: Literal[Kind.PURCHASE.value]
     chat_id: Union[int, None]
     goods_id: Union[str, None]
 
 
+class ReviewSearchSchema(ConfiguredBaseModel):
+    kind: Literal[Kind.REVIEW.value]
+    goods_id: int
+
+
 class CommonSearchSchema(BaseModel):
     limit: int = Field(default=1, gt=0, lt=10)
-    value: Union[UserSearchSchema, PurchaseSearchSchema] = Field(..., discriminator='kind')  # noqa: E501
+    value: Union[UserSearchSchema, PurchaseSearchSchema, ReviewSearchSchema] = Field(..., discriminator='kind')  # noqa: E501
 
 
 def common_search_params(payload: CommonSearchSchema):

@@ -9,6 +9,3 @@ class NewUserRequestSchema(BaseModel):
     phone: Union[str, None] = Field(..., description='Телефон пользователя')
     username: str
     language_code: Union[str, None]
-
-    class Config:
-        orm_mode = True
