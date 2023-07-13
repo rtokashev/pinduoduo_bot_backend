@@ -11,9 +11,8 @@ reg_rkm = ReplyKeyboardMarkup(
 main_rkm = ReplyKeyboardMarkup(
     [
         [KeyboardButton(main_texts.purchase_reg_btn)],
-        [KeyboardButton(main_texts.referral_btn)],
-        # [KeyboardButton(main_texts.subscribe_btn)],
-        # [KeyboardButton(main_texts.ask_btn)],
+        [KeyboardButton(main_texts.reviews_btn)],
+
     ],
     resize_keyboard=True,
     one_time_keyboard=True

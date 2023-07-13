@@ -6,7 +6,7 @@ MainTexts = namedtuple(
     'share_phone_btn share_phone_txt welcome_txt reg_txt reg_btn purchase_reg_btn referral_btn subscribe_btn ask_btn '
     'about_bot_btn channel_sub_txt shopping_channel_btn news_channel_btn cancel_btn imember_btn channel_list_txt '
     'reg_success_txt share_phone_warn_txt goods_url_txt request_form_txt post_confirm_btn post_cancel_btn '
-    'goods_url_warn_txt pub_post_txt error_txt is_banned_txt'
+    'goods_url_warn_txt pub_post_txt error_txt is_banned_txt warn_limit_txt reviews_btn'
 )
 
 main_texts = MainTexts(
@@ -21,6 +21,7 @@ main_texts = MainTexts(
     referral_btn='👨‍👦‍👦 Реферальная система',
     subscribe_btn='💳 Купить подписку',
     ask_btn='📣 Вопросы и предложения',
+    reviews_btn='🤦🏼‍♂️ Отзывы товаров',
     about_bot_btn='↗ Подробнее о боте',
     channel_sub_txt='<b>✅ Обязательным условием использования бота является подписка на следующие каналы бота:</b>',
     channel_list_txt='<i>*Пройдите по ссылкам на каналы, подпишитесь и нажмите я подписал(ась)ся</i>👇',
@@ -41,5 +42,6 @@ main_texts = MainTexts(
     pub_post_txt='<b>Спасибо 👍 Ваша публикация опубликовано, перейдите к публикации по ссылке: {}</b>\n\n'
                  '<i>*Данная публикация автоматический удалится из канала через 5 дней</i>',
     error_txt='<b>⚠️ Техническая неполадка попробуйте позже</b>',
-    is_banned_txt='<b>⚠️ Вы заблокированы!</b>'
+    is_banned_txt='<b>⚠️ Вы заблокированы!</b>',
+    warn_limit_txt='<b>⚠️ Вы исчерпали свой лимит (3 запроса в день), попробуйте завтра</b>',
 )
