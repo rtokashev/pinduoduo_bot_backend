@@ -17,6 +17,7 @@ from dudu_bot.utils import (
     APIClient
 )
 from dudu_bot.filters import IsNotBanned, IsChannelsSubscriber
+from dudu_bot.utils import APIClient
 
 
 @DP.message_handler(
@@ -25,13 +26,32 @@ from dudu_bot.filters import IsNotBanned, IsChannelsSubscriber
     regexp=fr'{main_texts.purchase_reg_btn}',
     state=None)
 async def purchase(message: types.Message):
-    await message.answer(
-        text=main_texts.goods_url_txt,
-        reply=False,
-        disable_web_page_preview=True,
-        reply_markup=req_cancel_ikm
-    )
-    await JointPurchaseRequest.Request.set()
+    request = APIClient()
+    chat_id = message.chat.id
+    try:
+        response = await request.session.get(
+            url=f'{settings.api_url}users/{chat_id}/limits',
+        )
+    except httpx.ConnectError:
+        response = None
+    if response:
+        if response.json().get('daily_requests_count', 0) > 0:
+            await message.answer(
+                text=main_texts.goods_url_txt,
+                reply=False,
+                disable_web_page_preview=True,
+                reply_markup=req_cancel_ikm
+            )
+            await JointPurchaseRequest.Request.set()
+        else:
+            await message.answer(
+                text=main_texts.warn_limit_txt,
+            )
+    else:
+        await message.reply(
+            text=main_texts.error_txt,
+            reply=False
+        )
 
 
 @DP.message_handler(state=JointPurchaseRequest.Request, content_types=types.ContentType.ANY)
