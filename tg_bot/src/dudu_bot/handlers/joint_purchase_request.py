@@ -88,7 +88,7 @@ async def post(call: CallbackQuery, state: FSMContext):
     goods_url = settings.goods_url.format(goods_id)
     post_id = post_data.message_id
     chat_id = call.message.chat.id
-    post_url = settings.post_url.format(post_id)
+    post_url = settings.shopping_post_url.format(post_id)
     body = {
         'chat_id': chat_id,
         "link": goods_url,
@@ -105,7 +105,7 @@ async def post(call: CallbackQuery, state: FSMContext):
     except httpx.ConnectError:
         response = None
     if response:
-        await call.message.answer(text=main_texts.pub_post_txt.format(post_url))
+        await call.message.answer(text=main_texts.shopping_pub_post_txt.format(post_url))
     else:
         await call.message.reply(
             text=main_texts.error_txt,

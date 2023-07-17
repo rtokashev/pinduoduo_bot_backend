@@ -12,6 +12,7 @@ main_rkm = ReplyKeyboardMarkup(
     [
         [KeyboardButton(main_texts.purchase_reg_btn)],
         [KeyboardButton(main_texts.reviews_btn)],
+        [KeyboardButton(main_texts.dudu_cargo_btn)],
 
     ],
     resize_keyboard=True,
@@ -20,6 +21,7 @@ main_rkm = ReplyKeyboardMarkup(
 
 reg_cancel_ikb = InlineKeyboardButton(text=main_texts.cancel_btn, callback_data="reg_cancel")
 req_cancel_ikb = InlineKeyboardButton(text=main_texts.cancel_btn, callback_data="req_cancel")
+review_cancel_ikb = InlineKeyboardButton(text=main_texts.cancel_btn, callback_data="review_cancel")
 i_member_ikb = InlineKeyboardButton(text=main_texts.imember_btn, callback_data="member")
 post_confirm_ikb = InlineKeyboardButton(text=main_texts.post_confirm_btn, callback_data="post_confirm")
 post_cancel_ikb = InlineKeyboardButton(text=main_texts.post_cancel_btn, callback_data="post_cancel")
@@ -56,6 +58,12 @@ filter_channel_link_ikm = InlineKeyboardMarkup(
 req_cancel_ikm = InlineKeyboardMarkup(
     inline_keyboard=[
         [req_cancel_ikb]
+    ]
+)
+
+review_cancel_ikm = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [review_cancel_ikb]
     ]
 )
 

@@ -49,3 +49,14 @@ class APIClient:
 
     def __call__(self) -> httpx.AsyncClient:
         return self.session
+
+
+def check_text(text: str):
+    # Паттерн для поиска URL в тексте
+    pattern = r'https?:|\w+:\/'
+    # Ищем все совпадения в тексте
+    matches = re.findall(pattern.lower(), text)
+    if matches:
+        return True
+    else:
+        return False
