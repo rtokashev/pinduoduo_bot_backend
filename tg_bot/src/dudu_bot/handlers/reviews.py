@@ -13,10 +13,10 @@ from dudu_bot.settings import settings
 from dudu_bot.utils import (
     check_goods_url,
     get_goods_id_goods_image,
-    APIClient
+    APIClient,
+    check_text
 )
 from dudu_bot.filters import IsNotBanned, IsChannelsSubscriber
-from dudu_bot.utils import check_text
 
 
 @DP.message_handler(

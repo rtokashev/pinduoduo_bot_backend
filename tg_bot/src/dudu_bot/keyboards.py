@@ -12,8 +12,7 @@ main_rkm = ReplyKeyboardMarkup(
     [
         [KeyboardButton(main_texts.purchase_reg_btn)],
         [KeyboardButton(main_texts.reviews_btn)],
-        [KeyboardButton(main_texts.dudu_cargo_btn)],
-
+        [KeyboardButton(main_texts.dudu_cargo_btn)]
     ],
     resize_keyboard=True,
     one_time_keyboard=True
@@ -28,6 +27,7 @@ post_cancel_ikb = InlineKeyboardButton(text=main_texts.post_cancel_btn, callback
 about_bot_ikb = InlineKeyboardButton(text=main_texts.about_bot_btn, url='https://t.me/arzanal_channel')
 shopping_channel_ikb = InlineKeyboardButton(text=main_texts.shopping_channel_btn, url='https://t.me/+2v2hiKpZCTpjMzYy')
 news_channel_ikb = InlineKeyboardButton(text=main_texts.news_channel_btn, url='https://t.me/+tL4k7RI9kBtmZmUy')
+cargo_code_ikb = InlineKeyboardButton(text=main_texts.cargo_address_btn, callback_data="cargo_code")
 
 about_bot_ikm = InlineKeyboardMarkup(
     inline_keyboard=[
@@ -70,5 +70,11 @@ review_cancel_ikm = InlineKeyboardMarkup(
 post_request_ikm = InlineKeyboardMarkup(
     inline_keyboard=[
         [post_confirm_ikb, post_cancel_ikb]
+    ]
+)
+
+cargo_code_ikm = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [cargo_code_ikb]
     ]
 )

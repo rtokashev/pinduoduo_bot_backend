@@ -17,7 +17,6 @@ from dudu_bot.utils import (
     APIClient
 )
 from dudu_bot.filters import IsNotBanned, IsChannelsSubscriber
-from dudu_bot.utils import APIClient
 
 
 @DP.message_handler(
