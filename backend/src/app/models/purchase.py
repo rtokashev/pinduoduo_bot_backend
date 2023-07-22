@@ -19,7 +19,7 @@ class Purchase(Base):
         BigInteger, ForeignKey('users.telegram_id'), nullable=False,
     )  # Индексировать ли? Надо ли делать уникальным?
     link = Column(String, nullable=False, unique=True)  # Определиться с ограничениями
-    goods_id = Column(Integer, nullable=False, index=True)
+    goods_id = Column(BigInteger, nullable=False, index=True)
     photo = Column(Text, nullable=False)  # Определиться что лучше для хранения(string или text)
     post_id = Column(Integer, nullable=False)
     post_url = Column(String, nullable=False)
