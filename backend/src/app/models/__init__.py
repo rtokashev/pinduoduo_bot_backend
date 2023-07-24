@@ -1,3 +1,4 @@
+from app.models.cargo import Cargo
 from app.models.limits import Limits
 from app.models.purchase import Base, Purchase
 from app.models.referral import Referral
@@ -11,4 +12,5 @@ __all__ = [
     'Referral',
     'Review',
     'User',
+    'Cargo',
 ]
