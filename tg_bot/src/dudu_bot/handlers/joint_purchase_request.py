@@ -57,13 +57,43 @@ async def purchase(message: types.Message):
 async def request_purchase(message: types.Message, state: FSMContext):
     if message.content_type == types.message.ContentType.TEXT and await check_goods_url(message.text):
         goods_id, goods_image = await get_goods_id_goods_image(url=message.text)
-        await state.update_data(goods_id=goods_id)
-        await state.update_data(goods_image=goods_image)
-        await message.answer(
-            text=main_texts.request_form_txt.format(goods_image, goods_id, goods_id),
-            reply_markup=post_request_ikm,
-        )
-        await JointPurchaseRequest.Post.set()
+        request = APIClient()
+        param = {
+            "limit": 1,
+            "value": {
+                "kind": "purchase",
+                "goods_id": goods_id
+            }
+        }
+        try:
+            response = await request.session.post(
+                url=f'{settings.api_url}search',
+                json=param
+            )
+        except httpx.ConnectError:
+            response = None
+        if response:
+            post_url = response.json()
+            if post_url:
+                post_url = response.json()[0].get('post_url', None)
+                await message.answer(
+                    text=main_texts.purchase_already_add_txt.format(post_url),
+                )
+                await state.finish()
+            else:
+                await state.update_data(goods_id=goods_id)
+                await state.update_data(goods_image=goods_image)
+                await message.answer(
+                    text=main_texts.request_form_txt.format(goods_image, goods_id, goods_id),
+                    reply_markup=post_request_ikm,
+                )
+                await JointPurchaseRequest.Post.set()
+        else:
+            await message.reply(
+                text=main_texts.error_txt,
+                reply=False
+            )
+            await state.finish()
     else:
         await message.answer(
             text=main_texts.goods_url_warn_txt

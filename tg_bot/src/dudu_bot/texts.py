@@ -8,7 +8,8 @@ MainTexts = namedtuple(
     'reg_success_txt share_phone_warn_txt goods_url_txt request_form_txt post_confirm_btn post_cancel_btn '
     'goods_url_warn_txt shopping_pub_post_txt error_txt is_banned_txt warn_limit_txt reviews_btn goods_url_review_txt '
     'dudu_cargo_btn reviews_text reviews_form_txt reviews_pub_post_txt reviews_warn_text cargo_info_txt '
-    'cargo_address_txt cargo_address_btn client_notify_btn client_notify_txt calc_data_txt'
+    'cargo_address_txt cargo_address_btn client_notify_btn client_notify_txt calc_data_txt reviews_already_add_txt '
+    'purchase_already_add_txt'
 )
 
 main_texts = MainTexts(
@@ -100,5 +101,10 @@ main_texts = MainTexts(
                       '\n\n<b>💰 К оплате:  {price} ₸</b>'
                       '\n\n<b>🧑‍🚀 Служба поддержки:  @dudubot_support</b>'
                       '\n\n<b>📍 Откуда забрать:  {address}</b>',
-    calc_data_txt='<b>✅ Введите (chat_id, вес товаров, цену к оплате) через запятой:</b>'
+    calc_data_txt='<b>✅ Введите (chat_id, вес товаров, цену к оплате) через запятой:</b>',
+    reviews_already_add_txt='<b>Для данного товара уже имеется отзыв. Пройдите по ссылке: {}</b>'
+                            '\n<i>Оставьте свой отзыв внизу комментарии поста</i>',
+    purchase_already_add_txt='<b>Для данного товара уже создана заявка на совместную покупку. '
+                             'Пройдите по ссылке: {}</b>'
+                            '\n<i>Обсудите детали внизу комментарии поста</i>',
 )
