@@ -9,3 +9,12 @@ class UserRegister(StatesGroup):
 class JointPurchaseRequest(StatesGroup):
     Request = State()
     Post = State()
+
+
+class Reviews(StatesGroup):
+    Goods = State()
+    Text = State()
+
+
+class ClientNotify(StatesGroup):
+    Calculation = State()
