@@ -27,7 +27,7 @@ class UserSearchSchema(ConfiguredBaseModel):
 class PurchaseSearchSchema(ConfiguredBaseModel):
     kind: Literal[Kind.PURCHASE.value]
     chat_id: Union[int, None]
-    goods_id: Union[str, None]
+    goods_id: Union[int, None]
 
 
 class ReviewSearchSchema(ConfiguredBaseModel):
