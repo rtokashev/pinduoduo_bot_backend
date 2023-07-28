@@ -14,3 +14,7 @@ class JointPurchaseRequest(StatesGroup):
 class Reviews(StatesGroup):
     Goods = State()
     Text = State()
+
+
+class ClientNotify(StatesGroup):
+    Calculation = State()

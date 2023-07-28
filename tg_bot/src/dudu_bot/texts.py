@@ -8,15 +8,14 @@ MainTexts = namedtuple(
     'reg_success_txt share_phone_warn_txt goods_url_txt request_form_txt post_confirm_btn post_cancel_btn '
     'goods_url_warn_txt shopping_pub_post_txt error_txt is_banned_txt warn_limit_txt reviews_btn goods_url_review_txt '
     'dudu_cargo_btn reviews_text reviews_form_txt reviews_pub_post_txt reviews_warn_text cargo_info_txt '
-    'cargo_address_txt cargo_address_btn'
+    'cargo_address_txt cargo_address_btn client_notify_btn client_notify_txt calc_data_txt'
 )
 
 main_texts = MainTexts(
     share_phone_btn='📱 Поделиться контактом',
     share_phone_txt='<b>✅ Поделитесь своим номером телефона</b>\n<i>*Нажмите кнопку снизу</i> 👇',
     share_phone_warn_txt='<b>⚠️ Поделитесь своим номером телефона</b>\n<i>*Нажмите кнопку снизу</i> 👇',
-    welcome_txt='Добро пожаловать!\n\nЯ чат-бот <b>DuDuBot</b>, личный помощник для покупок в Pinduoduo 🛍'
-                '\n\n <a href="https://www.youtube.com/watch?v=RG6cWQ2O5QY">Промо</a>',
+    welcome_txt='Добро пожаловать!\n\nЯ чат-бот <b>DuDuBot</b>, личный помощник для покупок в Pinduoduo 🛍',
     reg_txt='<b>✅ Нажмите кнопку регистрации, чтобы начать пользоваться ботом</b> 👇',
     reg_btn='➕ Регистрация',
     purchase_reg_btn='🛍 Совместная покупка',
@@ -86,7 +85,7 @@ main_texts = MainTexts(
     
     🕒 <b>Сроки доставки:</b>
     
-    7 - 10 дней (после того как ваш заказ прибудет на склад в Китае)
+    10 - 15 дней (после того как ваш заказ прибудет на склад в Китае)
     """,
     cargo_address_txt='<b><i>*Посмотрите <a href="https://www.youtube.com/watch?v=RG6cWQ2O5QY">видео инструкцию</a> '
                   'как добавить код и адрес в Pinduoduo</i></b>'
@@ -94,5 +93,12 @@ main_texts = MainTexts(
                   '\n\n<b>2. 13580304304</b>'
                   '\n\n<b>3. 广东省  佛山市  南海区</b>'
                   '\n\n<b>4. 佛山市南海区里水镇洲村社区三横路水松基工业区大管家仓储园L110-L111.唛头xxx (Astana {chat_id} {phone})</b>',
-    cargo_address_btn='🟩 Получить личный код(адрес) Pinduoduo'
+    cargo_address_btn='🟩 Получить личный код(адрес) Pinduoduo',
+    client_notify_btn='📣 Оповестить',
+    client_notify_txt='Приветствую 👋. Ваши товары прибыли в город. Спасибо за выбор 🚛 DuDu Cargo'
+                      '\n\n\n\n<b>⚖️ Общий вес товара:  {weight} кг.</b>'
+                      '\n\n<b>💰 К оплате:  {price} ₸</b>'
+                      '\n\n<b>🧑‍🚀 Служба поддержки:  @dudubot_support</b>'
+                      '\n\n<b>📍 Откуда забрать:  {address}</b>',
+    calc_data_txt='<b>✅ Введите (chat_id, вес товаров, цену к оплате) через запятой:</b>'
 )

@@ -6,7 +6,7 @@ from dudu_bot.texts import main_texts
 from dudu_bot.keyboards import (
     reg_rkm,
     main_rkm,
-    about_bot_ikm,
+    admin_rkm,
 )
 from dudu_bot.settings import DP, BOT, settings
 from dudu_bot.utils import APIClient
@@ -38,16 +38,22 @@ async def start(message: types.Message):
         )
         user = response.json()
         if user:
-            await message.reply(
-                text=main_texts.welcome_txt,
-                reply=False,
-                reply_markup=main_rkm
-            )
+            if chat_id in settings.bot_admins:
+                await message.reply(
+                    text=main_texts.welcome_txt,
+                    reply=False,
+                    reply_markup=admin_rkm
+                )
+            else:
+                await message.reply(
+                    text=main_texts.welcome_txt,
+                    reply=False,
+                    reply_markup=main_rkm
+                )
         else:
             await message.reply(
                 text=main_texts.welcome_txt,
-                reply=False,
-                reply_markup=about_bot_ikm
+                reply=False
             )
             await message.reply(
                 text=main_texts.reg_txt,
