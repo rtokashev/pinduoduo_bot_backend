@@ -3,7 +3,7 @@ import datetime
 from sqlalchemy import BigInteger, Boolean, Column, DateTime, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import relationship
 
-from src.core.database.session import Base
+from core.database.session import Base
 
 __all__ = [
     'Purchase',

@@ -3,7 +3,7 @@ import datetime
 from sqlalchemy import BigInteger, Boolean, Column, DateTime, Integer, String, UniqueConstraint
 from sqlalchemy.orm import relationship
 
-from src.core.database.session import Base
+from core.database.session import Base
 
 __all__ = [
     'User',
