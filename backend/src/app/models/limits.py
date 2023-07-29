@@ -1,6 +1,6 @@
 from sqlalchemy import BigInteger, Column, ForeignKey, Integer, SmallInteger
 
-from src.core.database.session import Base
+from core.database.session import Base
 
 __all__ = [
     'Limits',

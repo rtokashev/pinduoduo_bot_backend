@@ -2,7 +2,7 @@ import datetime
 
 from sqlalchemy import BigInteger, Column, DateTime, ForeignKey, Integer, Boolean, Float
 
-from src.core.database.session import Base
+from core.database.session import Base
 
 __all__ = [
     'Cargo',

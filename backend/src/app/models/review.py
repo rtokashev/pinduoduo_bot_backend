@@ -2,7 +2,7 @@ import datetime
 
 from sqlalchemy import BigInteger, Column, DateTime, Integer, String
 
-from src.core.database.session import Base
+from core.database.session import Base
 
 __all__ = [
     'Review',

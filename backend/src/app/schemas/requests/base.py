@@ -1,7 +1,5 @@
 from enum import Enum
 
-from pydantic import BaseModel, Extra
-
 
 class Kind(Enum):
     USER = 'user'

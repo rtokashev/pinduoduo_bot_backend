@@ -1,11 +1,26 @@
-version: '3.1'
+version: '3.8'
 
 services:
-  db:
-    container_name: postgres
+  api:
     build:
       context: ./
-      dockerfile: docker/postgresql/postgresql.Dockerfile
+      dockerfile: docker/api/Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    build:
+      context: ./
+      dockerfile: docker/postgresql/Dockerfile
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    hostname: backend_postgres
     command: postgres -c shared_preload_libraries=pg_cron
     restart: on-failure
     environment:
