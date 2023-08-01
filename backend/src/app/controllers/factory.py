@@ -1,6 +1,7 @@
 from fastapi import Depends
 
 from app.controllers import (
+    CargoController,
     PurchaseController,
     ReferralController,
     ReviewController,
@@ -8,6 +9,7 @@ from app.controllers import (
     UserLimitsController,
 )
 from app.repositories import (
+    CargoRepository,
     PurchaseRepository,
     ReferralRepository,
     ReviewRepository,
@@ -44,4 +46,10 @@ def get_user_limits_controller(db_session=Depends(get_async_db_session)):
 def get_purchase_review_controller(db_session=Depends(get_async_db_session)):
     return ReviewController(
         repository=ReviewRepository(db_session),
+    )
+
+
+def get_cargo_controller(db_session=Depends(get_async_db_session)):
+    return CargoController(
+        repository=CargoRepository(db_session),
     )

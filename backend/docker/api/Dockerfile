@@ -16,7 +16,9 @@ ENV VIRTUAL_ENV=/app/venv \
     PYTHONPATH="/app/src"
 WORKDIR /app
 COPY --from=builder /venv /app/venv
-COPY src /app
-COPY start.sh /app
+COPY src /app/src
+COPY alembic/ /app/alembic
+COPY alembic.ini /app/
+COPY start.sh /app/
 RUN chmod +x /app/start.sh
 CMD ["./start.sh"]

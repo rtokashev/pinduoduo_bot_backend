@@ -13,7 +13,7 @@ __all__ = [
 class Cargo(Base):
     __tablename__ = 'cargo'
 
-    id = Column(Integer, autoincrement=True, primary_key=True, index=True)
+    id = Column(Integer, autoincrement=True, primary_key=True, index=True, comment='delivery_id(альтернативно)')
     chat_id = Column(
         BigInteger, ForeignKey('users.telegram_id'), nullable=False,
     )
