@@ -1,3 +1,4 @@
 #!/bin/sh
 
-python3 main.py
+PYTHONPATH=src alembic upgrade head
+python3 src/main.py
