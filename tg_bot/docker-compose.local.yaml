@@ -5,6 +5,8 @@ services:
     build:
       context: ./
       dockerfile: docker/tg_bot/Dockerfile
+    networks:
+      - common_network
 
 networks:
   common_network:
