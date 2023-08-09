@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: docker/tg_bot/Dockerfile
+
+networks:
+  common_network:
+    external: true
