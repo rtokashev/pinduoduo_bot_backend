@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     goods_url: str = 'https://mobile.yangkeduo.com/goods1.html?goods_id={}'
     shopping_post_url: str = 'https://t.me/c/1809591303/{}'
     reviews_post_url: str = 'https://t.me/c/1803263473/{}'
-    api_url: str = 'http://127.0.0.1:8000/'
+    api_url: str = 'http://192.168.0.1:8000/'  # вынести отдельно в конфиг
     admin_addresses: dict = {
         767337244: 'https://go.2gis.com/lnvd1'
     }
