@@ -5,11 +5,9 @@ services:
     build:
       context: ./
       dockerfile: docker/api/Dockerfile
+    hostname: backend_api
     networks:
-      common_network:
-        ipv4_address: 192.168.0.1
-    ports:
-      - "127.0.0.1:8000:8000"
+      - common_network
     depends_on:
       postgres:
         condition: service_healthy
@@ -19,8 +17,7 @@ services:
       context: ./
       dockerfile: docker/postgresql/Dockerfile
     networks:
-      common_network:
-        ipv4_address: 192.168.0.2
+      - common_network
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready" ]
       interval: 10s
@@ -31,8 +28,6 @@ services:
     restart: on-failure
     environment:
       POSTGRES_PASSWORD: postgres
-    ports:
-      - '127.0.0.1:5432:5432'
     volumes:
       - db:/var/lib/postgresql/data
 
@@ -43,6 +38,3 @@ volumes:
 networks:
   common_network:
     name: common_network
-    ipam:
-      config:
-        - subnet: "192.168.0.0/24"
