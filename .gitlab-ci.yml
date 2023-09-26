@@ -2,7 +2,8 @@ image:
   name: docker/compose:latest
 
 services:
-  - docker:dind
+  - name: docker:dind
+    alias: docker
 
 stages:
   - build
