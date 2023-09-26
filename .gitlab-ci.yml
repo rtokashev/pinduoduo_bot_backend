@@ -1,12 +1,12 @@
 image:
-  name: docker/compose:latest
+  name: docker
 
 stages:
   - build
 
 before_script:
   - docker version
-  - docker-compose version
+  - docker compose version
 
 build:
   stage: build
