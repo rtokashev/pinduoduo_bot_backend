@@ -3,6 +3,7 @@ image:
 
 stages:
   - build
+  - deploy
 
 before_script:
   - docker version
@@ -19,3 +20,15 @@ build:
     - gitlab-ci-0.0.1
   tags:
     - hetzner-cloud
+
+
+deploy:
+  stage: deploy
+  script:
+    - cd backend && docker compose up -d
+    - cd tg_bot && docker compose up -d
+  only:
+    - gitlab-ci-0.0.1
+  tags:
+    - hetzner-cloud
+  when: manual
