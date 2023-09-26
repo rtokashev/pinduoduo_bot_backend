@@ -4,6 +4,9 @@ image:
 stages:
   - build
 
+variables:
+   DOCKER_HOST: "tcp://docker:2375"
+
 before_script:
   - docker version
   - docker compose version
