@@ -1,9 +1,15 @@
+image:
+  name: docker/compose:latest
+
 services:
   - docker:dind
 
 stages:
   - build
-  - deploy
+
+before_script:
+  - docker version
+  - docker-compose version
 
 build:
   stage: build
