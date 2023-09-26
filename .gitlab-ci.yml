@@ -12,7 +12,8 @@ build:
     - echo "Build was succesful"
   only:
     - gitlab-ci-0.0.1
-
+  tags:
+    - hetzner
 
 deploy:
   stage: deploy
