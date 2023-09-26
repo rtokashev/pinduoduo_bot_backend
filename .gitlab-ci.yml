@@ -13,8 +13,8 @@ build:
   stage: build
   script:
     - ls -lah
-    - cd backend && docker compose build
-    - cd tg_bot && docker compose build
+    - docker compose -f backend/docker-compose.yaml build
+    - docker compose -f tg_bot/docker-compose.yaml build
     - echo "Build was successful"
   only:
     - gitlab-ci-0.0.1
@@ -25,9 +25,8 @@ build:
 deploy:
   stage: deploy
   script:
-    - cd backend && docker compose up -d
-    - ls -lah
-    - cd tg_bot && docker compose up -d
+    - docker compose -f backend/docker-compose.yaml up -d
+    - docker compose -f tg_bot/docker-compose.yaml up -d
   only:
     - gitlab-ci-0.0.1
   tags:
