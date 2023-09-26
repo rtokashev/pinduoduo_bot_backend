@@ -17,7 +17,7 @@ build:
     - docker compose -f tg_bot/docker-compose.yaml build
     - echo "Build was successful"
   only:
-    - gitlab-ci-0.0.1
+    - main
   tags:
     - hetzner-cloud
 
@@ -28,7 +28,10 @@ deploy:
     - docker compose -f backend/docker-compose.yaml up -d
     - docker compose -f tg_bot/docker-compose.yaml up -d
   only:
-    - gitlab-ci-0.0.1
+    - main
   tags:
     - hetzner-cloud
   when: manual
+
+
+# TODO: Добавить джобы: линтинга при изменении кода, тестового билда при изменении docker-файлов и тд
