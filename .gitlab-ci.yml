@@ -1,0 +1,23 @@
+services:
+  - docker:dind
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - docker-compose build
+    - echo "Build was succesful"
+  only:
+    - main
+
+
+deploy:
+  stage: deploy
+  script:
+    - docker-compose up -d
+  only:
+    - main
+  when: manual
