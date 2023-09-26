@@ -8,10 +8,10 @@ stages:
 build:
   stage: build
   script:
-    - docker-compose build
+    - docker compose -f backend/docker-compose.yaml build
     - echo "Build was succesful"
   only:
-    - main
+    - gitlab-ci-0.0.1
 
 
 deploy:
@@ -19,5 +19,5 @@ deploy:
   script:
     - docker-compose up -d
   only:
-    - main
+    - gitlab-ci-0.0.1
   when: manual
