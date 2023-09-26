@@ -11,6 +11,7 @@ before_script:
 build:
   stage: build
   script:
+    - ls -lah
     - docker-compose -f backend/docker-compose.yaml build
     - echo "Build was successful"
   only:
