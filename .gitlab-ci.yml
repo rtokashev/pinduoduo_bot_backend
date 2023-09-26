@@ -26,6 +26,7 @@ deploy:
   stage: deploy
   script:
     - cd backend && docker compose up -d
+    - ls -lah
     - cd tg_bot && docker compose up -d
   only:
     - gitlab-ci-0.0.1
