@@ -20,11 +20,3 @@ build:
     - gitlab-ci-0.0.1
   tags:
     - hetzner-cloud
-
-deploy:
-  stage: deploy
-  script:
-    - docker-compose up -d
-  only:
-    - gitlab-ci-0.0.1
-  when: manual
