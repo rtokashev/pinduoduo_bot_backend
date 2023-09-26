@@ -1,22 +1,18 @@
 image:
   name: docker/compose:latest
 
-services:
-  - name: docker:dind
-    alias: docker
-
 stages:
   - build
 
 before_script:
   - docker version
-  - docker-compose version
+  - docker compose version
 
 build:
   stage: build
   script:
     - docker compose -f backend/docker-compose.yaml build
-    - echo "Build was succesful"
+    - echo "Build was successful"
   only:
     - gitlab-ci-0.0.1
   tags:
