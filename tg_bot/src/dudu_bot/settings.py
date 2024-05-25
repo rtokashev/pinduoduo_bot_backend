@@ -4,7 +4,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 
 class Settings(BaseSettings):
-    bot_token: str = '6059471641:AAEC8bKkfdaL_84SBqUDkOkXmSCSmqtpAU8'
+    bot_token: str = ''
     bot_admins: list = [767337244]
     channel_chat_ids: list = [-1001809591303, -1001985864035]
     reviews_chat_id = -1001803263473
